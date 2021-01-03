@@ -6,6 +6,6 @@
 #include "../Snake.h"
 #include <iostream>
 TEST(SnakeTest, Year){
-    Snake s = Snake();
+//    Snake s = Snake();
     EXPECT_EQ(1,1);
 }
