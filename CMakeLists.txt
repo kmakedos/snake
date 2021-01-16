@@ -11,6 +11,6 @@ find_package (Boost REQUIRED COMPONENTS unit_test_framework system filesystem da
 include_directories (${Boost_INCLUDE_DIRS})
 
 include_directories(.)
-add_executable(Snake main.cpp Grid.cpp Snake.cpp)
+add_executable(Snake main.cpp Snake.cpp)
 target_link_libraries(Snake ${Boost_LIBRARIES})
 add_subdirectory(test)

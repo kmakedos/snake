@@ -1,12 +1,17 @@
 #include <iostream>
 #include "Snake.h"
-#include "Grid.h"
 using namespace std;
 int main(int argc, char *argv[]) {
-    Grid grid = Grid(20,4);
-    std::cout << grid;
+    int X= 10; int Y=4;
+    Snake snake = Snake(3, 0, 0, X,Y);
+    std::cout << snake;
     std::list<std::pair<int, int>> x;
-    x.push_back(std::pair<int,int>(2,3));
-
-    grid.AddLine(x);
+    for (int i =0; i < X; i++){
+        for (int j=0; j < Y; j++){
+            x.emplace_back(i,2);
+        }
+    }
+    snake.AddLine(x);
+    std::cout << "\n";
+    std::cout << snake;
 }
