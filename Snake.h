@@ -1,25 +1,20 @@
 //
-// Created by kostas on 24/12/20.
+// Created by kostas on 30/1/21.
 //
 
-#ifndef SNAKE_H
-#define SNAKE_H
+#ifndef SNAKE_SNAKE_H
+#define SNAKE_SNAKE_H
 #include <vector>
-#include <list>
-
-class Snake{
+typedef std::vector<std::pair<int, int>> SNAKE;
+class Snake {
 public:
-    Snake(int grid_X, int grid_Y, int snake_size);
-    void ShowGrid();
-    void PutSnake(char c);
-    int CalcPos(int x, int y);
-    void Move(int x, int y);
+    Snake(int x, int y);
+    SNAKE& GetSnake();
+    void DrawSnake(void(*DrawHandler)(int,int,char));
 private:
-    int x_size_;
-    int y_size_;
-    std::list<std::pair<int,int>> snake_;
-    std::vector<char> grid_;
-    int snake_size_;
+    SNAKE snake_;
+    int snake_size;
 };
 
-#endif 
+
+#endif //SNAKE_SNAKE_H

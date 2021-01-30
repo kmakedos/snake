@@ -1,48 +1,25 @@
 //
-// Created by kostas on 24/12/20.
+// Created by kostas on 30/1/21.
 //
+#include <ncurses.h>
 #include <iostream>
 #include "Snake.h"
 
-Snake::Snake(int grid_X, int grid_Y, int snake_size) {
-    x_size_ = grid_X;
-    y_size_ = grid_Y;
-    snake_size_ = snake_size;
-    for (int i =0; i < x_size_ * y_size_; i++){
-        grid_.emplace_back('0');
-    }
-    for (int i = 0; i < snake_size_; i++){
-        snake_.emplace(snake_.cbegin(), i + x_size_/2-snake_size_,y_size_/2);
-
+Snake::Snake(int x, int y) {
+    snake_size = 3;
+    for (int i = 0; i < snake_size; i++){
+        snake_.emplace_back(x-i,y);
     }
 }
 
-
-void Snake::ShowGrid() {
-    PutSnake('1');
-    for (int y = 0; y < y_size_; y++){
-        std::cout << "\n";
-        for (int x = 0; x < x_size_; x++){
-            std::cout << grid_[CalcPos(x,y)] << " ";
-        }
-    }
+SNAKE& Snake::GetSnake() {
+    return snake_;
 }
 
-int Snake::CalcPos(int x, int y){
-    return y * x_size_ + x;
+void Snake::DrawSnake(void(*DrawHandler)(int,int,char)) {
+   for (auto &it: snake_){
+       DrawHandler(it.first, it.second, 'C');
+   }
 }
 
 
-void Snake::PutSnake(char c) {
-    int i = 0 ;
-    for (auto &it: snake_){
-        grid_[CalcPos(it.first, it.second)] = c;
-    }
-}
-
-void Snake::Move(int x, int y) {
-    PutSnake('0');
-    auto tmp = snake_.cbegin();
-    snake_.emplace(snake_.cbegin(), tmp->first, tmp->second-1);
-    snake_.pop_back();
-}
