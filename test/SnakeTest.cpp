@@ -3,7 +3,6 @@
 //
 
 #include <gtest/gtest.h>
-#include "../Snake.h"
 #include <iostream>
 TEST(SnakeTest, CalcPos){
 //    Snake sn = Snake(20,20,3);
