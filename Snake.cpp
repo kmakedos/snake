@@ -1,10 +1,11 @@
 //
 // Created by kostas on 30/1/21.
 //
-
+#include <stdlib.h>
+#include <unistd.h>
 #include "Snake.h"
 Snake::Snake(int x_pos, int y_pos) {
-    snake_size_ = 3;
+    snake_size_ = 10;
     for (int i = 0; i < snake_size_; i++){
         snake_.emplace_back(x_pos-i,y_pos);
     }
@@ -26,7 +27,11 @@ void Snake::DrawChar(int x, int y, char c) {
         wrefresh(window_);
     }
     else{
-        addstr("Print outside wall\n");
+        nodelay(window_, FALSE);
+        addstr("Game Over! \n");
+        wrefresh(window_);
+        sleep(2);
+        exit(EXIT_SUCCESS);
     }
 }
 
@@ -44,14 +49,14 @@ void Snake::MoveHorizontal(int step) {
     int new_x = snake_.cbegin()->first + step;
     snake_.emplace(snake_.cbegin(), new_x, snake_.cbegin()->second);
     snake_.pop_back();
-    DrawSnake('1');
+    DrawSnake('@');
 }
 void Snake::MoveVertical(int step) {
     DrawSnake(' ');
     int new_y = snake_.cbegin()->second + step;
     snake_.emplace(snake_.cbegin(), snake_.cbegin()->first, new_y);
     snake_.pop_back();
-    DrawSnake('1');
+    DrawSnake('@');
 }
 
 void Snake::Move(DIRECTION direction) {
