@@ -12,6 +12,6 @@ find_package(Curses REQUIRED)
 include_directories (${Boost_INCLUDE_DIRS} ${CURSES_INCLUDE_DIR})
 
 include_directories(.)
-add_executable(Snake main.cpp sWindow.cpp)
+add_executable(Snake main.cpp Snake.cpp)
 target_link_libraries(Snake ${Boost_LIBRARIES} ${CURSES_LIBRARIES})
 add_subdirectory(test)
