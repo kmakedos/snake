@@ -31,10 +31,10 @@ int main(int argc, char *argv[]) {
     start_time = time(NULL);
     int c = ' ';
     c = wgetch(snake.GetWindow());
-
-    while ((c != KEY_EXIT) && (seconds < 20)){
+    while ((c != KEY_EXIT) && (seconds < 200) && (! snake.GameOver())){
         snake.Move(NONE);
-        usleep(200000);
+        int speed_factor = (int)(seconds/10) % 20 / 4 + 1;
+        usleep(200000/speed_factor);
         if ((c = kbhit(snake.GetWindow())) != 1){
             switch (c) {
                 case KEY_UP:
@@ -56,6 +56,11 @@ int main(int argc, char *argv[]) {
         }
         curr_time = time(NULL);
         seconds = difftime(curr_time, start_time);
+    }
+
+    delwin(snake.GetWindow());
+    if (snake.GameOver()){
+        std::cout << "Game Over!!\n\n";
     }
 
 }
